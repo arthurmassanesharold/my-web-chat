@@ -5,10 +5,9 @@ import {
   Route,
 } from 'react-router-dom';
 import Navigation from 'pages/Navigation';
+import SignIn from 'pages/SignIn';
+import SignUp from 'pages/SignUp';
 import LandingPage from 'pages/Landing';
-import SignupPage from 'pages/SignUp';
-import SignInPage from 'pages/SignIn';
-import Homepage from 'pages/Home';
 
 import * as ROUTES from 'constants/routes';
 
@@ -18,9 +17,8 @@ const App = () => (
       <Navigation />
       <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignupPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route path={ROUTES.HOME} component={Homepage} />
+      <Route path={ROUTES.SIGN_IN} component={SignIn} />
+      <Route path={ROUTES.SIGN_UP} component={SignUp} />
     </div>
   </Router>
 );

@@ -1,13 +1,25 @@
+// @flow
 import React from 'react';
+
+const SignInMessage = 'Sign In';
+const UserNameTitle = 'Username: ';
+const PasswordTitle = 'Password: ';
+const ButtonMessage = 'Enter';
+const UserNameInput = <input type="text" />;
+const PasswordInput = <input type="text" />;
+const Button = <button type="submit">{ButtonMessage}</button>;
 
 const SignInPage = () => (
   <>
-    <h1>Sign In</h1>
-    <form>
-      <label for="name">Username: </label>
-      <input type="text" name="name" />
-      <button>Enter</button>
-    </form>
+    <h1>{SignInMessage}</h1>
+    {UserNameTitle}
+    {UserNameInput}
+    <br />
+    <br />
+    {PasswordTitle}
+    {PasswordInput}
+    <br />
+    {Button}
   </>
 );
 

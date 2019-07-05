@@ -1,0 +1,64 @@
+[ignore]
+; Ignore RNTester
+./node_modules/jest/.*
+./node_modules/jest-config/.*
+.*/node_modules/redux-persist/.*
+
+[include]
+./src/
+
+[lints]
+untyped-import=warn
+untyped-type-import=error
+unsafe-getters-setters=error
+
+[options]
+include_warnings=false
+emoji=true
+module.system.node.resolve_dirname=node_modules
+esproposal.optional_chaining=enable
+server.max_workers=1
+
+module.system=haste
+
+module.file_ext=.js
+module.file_ext=.jsx
+module.file_ext=.json
+module.file_ext=.ios.js
+
+module.name_mapper='^components\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^connectedComponents\(.*\)$' -> '<PROJECT_ROOT>/src/connectedComponents/\1'
+module.name_mapper='^config\(.*\)$' -> '<PROJECT_ROOT>/src/config/\1'
+module.name_mapper='^hoc\(.*\)$' -> '<PROJECT_ROOT>/src/hoc/\1'
+module.name_mapper='^hooks\(.*\)$' -> '<PROJECT_ROOT>/src/hooks/\1'
+module.name_mapper='^translations\(.*\)$' -> '<PROJECT_ROOT>/src/translations/\1'
+module.name_mapper='^constants\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
+module.name_mapper='^services\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
+module.name_mapper='^pages\(.*\)$' -> '<PROJECT_ROOT>/src/pages/\1'
+module.name_mapper='^assets\(.*\)$' -> '<PROJECT_ROOT>/src/assets/\1'
+module.name_mapper='^forkedLibraries\(.*\)$' -> '<PROJECT_ROOT>/src/forkedLibraries/\1'
+module.name_mapper='^App.css$' -> '<PROJECT_ROOT>/src/App.css'
+module.name_mapper='^App.js$' -> '<PROJECT_ROOT>/src/App.js'
+module.name_mapper='^Routes$' -> '<PROJECT_ROOT>/src/Routes.js'
+module.name_mapper='^sagas$' -> '<PROJECT_ROOT>/src/sagas.js'
+module.name_mapper='^setupTests$' -> '<PROJECT_ROOT>/src/setupTests.js'
+module.name_mapper='^store$' -> '<PROJECT_ROOT>/src/store.js'
+module.name_mapper='^rootReducer$' -> '<PROJECT_ROOT>/src/rootReducer.js'
+module.name_mapper='^rootSelectors$' -> '<PROJECT_ROOT>/src/rootSelectors.js'
+module.name_mapper='^selectors\(.*\)$' -> '<PROJECT_ROOT>/src/selectors/\1'
+
+munge_underscores=true
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FlowFixMeProps
+suppress_type=$FlowFixMeState
+suppress_type=$FixMe
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(>=0\\.\\(5[0-6]\\|[1-4][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native_oss[a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(>=0\\.\\(5[0-6]\\|[1-4][0-9]\\|[0-9]\\).[0-9]\\)? *\\(site=[a-z,_]*react_native_oss[a-z,_]*\\)?)\\)?:? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
+suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
+
+[version]
+^0.98.0
