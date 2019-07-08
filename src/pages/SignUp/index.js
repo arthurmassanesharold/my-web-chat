@@ -1,18 +1,18 @@
 // @flow
 import React, { useState } from 'react';
-import UserNameInput from 'components/UsernameInput';
+import EmailInput from 'components/EmailInput';
 import PasswordInput from 'components/PasswordInput';
 import { firestore } from 'config';
-// import firebase from 'firebase';
+import firebase from 'firebase';
 import Spacer from 'components/Spacer';
 
 type Credentials = {|
-  password: ?string,
-  username: ?string,
+  email: string,
+  password: string,
 |}
 
 const InputField = () => {
-  const [credentials, setCredentials] = useState<Credentials>({ password: null, username: null });
+  const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
   const updateInput = (event) => {
     setCredentials({
       ...credentials,
@@ -20,38 +20,28 @@ const InputField = () => {
     });
   };
 
-  const addUser = (e) => {
-    e.preventDefault();
-    const db = firestore;
-    // firebase.auth().createUserWithEmailAndPassword(credentials.username, credentials.password);
-    db.collection('users').add({
-      name: credentials.username,
+  const addUser = async (event) => {
+    event.preventDefault();
+    await firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
+    await firestore.collection('users').add({
+      name: credentials.email,
     });
-    setCredentials({ password: null, username: null });
+    setCredentials({ email: '', password: '' });
   };
+  const SignUpMessage = 'Sign Up';
   const ButtonMessage = 'Enter';
-  const Button = <button type="submit">{ButtonMessage}</button>;
   return (
     <>
+      <h1>{SignUpMessage}</h1>
       <form onSubmit={addUser}>
-        <UserNameInput username={credentials.username} updateInput={updateInput} />
+        <EmailInput email={credentials.email} updateInput={updateInput} />
         <Spacer size={15} />
         <PasswordInput password={credentials.password} updateInput={updateInput} />
         <Spacer size={15} />
-        {Button}
+        <button type="submit">{ButtonMessage}</button>
       </form>
     </>
   );
 };
 
-const SignupPage = () => {
-  const SignUpMessage = 'Sign Up';
-  return (
-    <>
-      <h1>{SignUpMessage}</h1>
-      <InputField />
-    </>
-
-  );
-};
-export default SignupPage;
+export default InputField;
