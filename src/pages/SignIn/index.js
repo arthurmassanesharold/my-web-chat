@@ -6,8 +6,8 @@ const UserNameTitle = 'Username: ';
 const PasswordTitle = 'Password: ';
 const ButtonMessage = 'Enter';
 const UserNameInput = <input type="text" />;
-const PasswordInput = <input type="text" />;
-const Button = <button type="submit">{ButtonMessage}</button>;
+const PasswordInput = <input type="password" />;
+const Button = <button type="submit" onClick="alert('hi');">{ButtonMessage}</button>;
 
 const SignInPage = () => (
   <>
