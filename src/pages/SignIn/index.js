@@ -1,25 +1,18 @@
 // @flow
 import React from 'react';
+import Spacer from 'components/Spacer';
 
 const SignInMessage = 'Sign In';
-const UserNameTitle = 'Username: ';
-const PasswordTitle = 'Password: ';
 const ButtonMessage = 'Enter';
-const UserNameInput = <input type="text" />;
-const PasswordInput = <input type="password" />;
-const Button = <button type="submit" onClick="alert('hi');">{ButtonMessage}</button>;
 
 const SignInPage = () => (
   <>
     <h1>{SignInMessage}</h1>
-    {UserNameTitle}
-    {UserNameInput}
-    <br />
-    <br />
-    {PasswordTitle}
-    {PasswordInput}
-    <br />
-    {Button}
+    <input type="text" placeholder="email" />
+    <Spacer size={15} />
+    <input type="password" placeholder="password" />
+    <Spacer size={15} />
+    <button type="submit">{ButtonMessage}</button>
   </>
 );
 
