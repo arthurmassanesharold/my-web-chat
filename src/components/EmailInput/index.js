@@ -2,7 +2,7 @@
 import React from 'react';
 
 type Props = {|
-  password: ?string,
+  email: ?string,
   updateInput: Function,
 |}
 
@@ -14,18 +14,18 @@ const styles = {
   },
 };
 
-const PasswordInput = (props: Props) => {
-  const { password, updateInput } = props;
+const EmailInput = (props: Props) => {
+  const { email, updateInput } = props;
   return (
     <input
-      type="password"
-      name="password"
+      type="text"
+      name="email"
       onChange={updateInput}
-      placeholder="password"
-      value={password}
+      placeholder="email"
+      value={email}
       style={styles.input}
     />
   );
 };
 
-export default PasswordInput;
+export default EmailInput;
