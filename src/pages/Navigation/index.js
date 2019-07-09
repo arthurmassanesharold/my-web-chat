@@ -5,13 +5,16 @@ import * as ROUTES from 'constants/routes';
 
 const HomeTitle = 'Home';
 const SignInName = 'Sign In';
-const SignInMessage = ' Already have an account?  ';
+const SignInMessage = '  Already have an account?  ';
 const SignUpName = 'Sign Up';
 
 const styles = {
   link: {
     backgroundColor: 'green',
+    border: '2px solid darkgreen',
+    borderRadius: '2px',
     color: 'white',
+    margin: '10px',
     padding: '5px',
     textDecoration: 'none',
   },
@@ -21,8 +24,12 @@ const styles = {
     padding: '15px',
     textAlign: 'center',
   },
+  text: {
+    color: 'darkgreen',
+    fontStyle: 'italic',
+  },
   title: {
-    color: 'green',
+    color: 'darkgreen',
     textDecoration: 'none',
   },
 };
@@ -34,7 +41,7 @@ const Navigation = () => (
         <h1>{HomeTitle}</h1>
       </Link>
       <Link to={ROUTES.SIGN_UP} style={styles.link}>{SignUpName}</Link>
-      {SignInMessage}
+      <span style={styles.text}>{SignInMessage}</span>
       <Link to={ROUTES.SIGN_IN} style={styles.link}>{SignInName}</Link>
     </div>
   </>

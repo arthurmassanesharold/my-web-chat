@@ -6,6 +6,14 @@ type Props = {|
   updateInput: Function,
 |}
 
+const styles = {
+  input: {
+    border: '1px solid green',
+    borderRadius: '3px',
+    color: 'darkgreen',
+  },
+};
+
 const PasswordInput = (props: Props) => {
   const { password, updateInput } = props;
   return (
@@ -15,6 +23,7 @@ const PasswordInput = (props: Props) => {
       onChange={updateInput}
       placeholder="password"
       value={password}
+      style={styles.input}
     />
   );
 };
