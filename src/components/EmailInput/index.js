@@ -6,6 +6,14 @@ type Props = {|
   updateInput: Function,
 |}
 
+const styles = {
+  input: {
+    border: '1px solid green',
+    borderRadius: '3px',
+    color: 'darkgreen',
+  },
+};
+
 const EmailInput = (props: Props) => {
   const { email, updateInput } = props;
   return (
@@ -15,6 +23,7 @@ const EmailInput = (props: Props) => {
       onChange={updateInput}
       placeholder="email"
       value={email}
+      style={styles.input}
     />
   );
 };
