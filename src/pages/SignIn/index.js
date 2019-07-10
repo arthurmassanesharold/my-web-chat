@@ -1,9 +1,21 @@
 // @flow
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Spacer from 'components/Spacer';
 import EmailInput from 'components/EmailInput';
 import PasswordInput from 'components/PasswordInput';
 import firebase from 'config';
+import { setIsLoggedIn, setUserInfo, type Action } from 'pages/SignIn/actions';
+
+const mapDispatchToProps = {
+  setIsLoggedIn,
+  setUserInfo,
+};
+
+type Props = {|
+  setIsLoggedIn: (isLoggedIn: boolean) => Action,
+  setUserInfo: (userInfo: UserInfo) => Action,
+|}
 
 const styles = {
   box: {
@@ -27,7 +39,7 @@ type Credentials = {|
 const SignInMessage = 'Sign In';
 const ButtonMessage = 'Enter';
 
-const SignInPage = () => {
+const SignInPage = (props: Props) => {
   const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
   const updateInput = (event) => {
     setCredentials({
@@ -40,16 +52,12 @@ const SignInPage = () => {
       event.preventDefault();
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
       setCredentials({ email: '', password: '' });
+      props.setIsLoggedIn(true);
+      props.setUserInfo({ email: credentials.email });
     } catch (error) {
       alert(error.message);
     }
   };
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      console.log(user);
-    }
-  });
   return (
     <>
       <div style={styles.box}>
@@ -59,11 +67,11 @@ const SignInPage = () => {
           <Spacer size={15} />
           <PasswordInput password={credentials.password} updateInput={updateInput} />
           <Spacer size={15} />
-          <button type="submit" style={styles.button}>{ButtonMessage}</button>
+          <button className="signInButton" type="submit" style={styles.button}>{ButtonMessage}</button>
         </form>
       </div>
     </>
   );
 };
 
-export default SignInPage;
+export default connect(null, mapDispatchToProps)(SignInPage);

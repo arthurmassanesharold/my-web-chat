@@ -1,15 +1,27 @@
 // @flow
 import React, { useState } from 'react';
 import EmailInput from 'components/EmailInput';
+import { connect } from 'react-redux';
 import PasswordInput from 'components/PasswordInput';
 import { firestore } from 'config';
 import firebase from 'firebase';
 import Spacer from 'components/Spacer';
+import { setIsLoggedIn, type Action } from 'pages/SignIn/actions';
+
+const mapDispatchToProps = {
+  setIsLoggedIn,
+};
+
+type Props = {|
+  setIsLoggedIn: (isLoggedIn: boolean) => Action,
+|}
 
 const styles = {
   box: {
+    alignItems: 'center',
     color: 'darkgreen',
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: 'green',
@@ -25,7 +37,7 @@ type Credentials = {|
   password: string,
 |}
 
-const SignUpPage = () => {
+const SignUpPage = (props: Props) => {
   const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
   const updateInput = (event) => {
     setCredentials({
@@ -42,6 +54,8 @@ const SignUpPage = () => {
         email: credentials.email,
       });
       setCredentials({ email: '', password: '' });
+      await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
+      props.setIsLoggedIn(true);
     } catch (error) {
       alert(error.message);
     }
@@ -64,4 +78,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default connect(null, mapDispatchToProps)(SignUpPage);
