@@ -35,6 +35,7 @@ module.name_mapper='^translations\(.*\)$' -> '<PROJECT_ROOT>/src/translations/\1
 module.name_mapper='^constants\(.*\)$' -> '<PROJECT_ROOT>/src/constants/\1'
 module.name_mapper='^services\(.*\)$' -> '<PROJECT_ROOT>/src/services/\1'
 module.name_mapper='^pages\(.*\)$' -> '<PROJECT_ROOT>/src/pages/\1'
+module.name_mapper='^reducers\(.*\)$' -> '<PROJECT_ROOT>/src/reducers/\1'
 module.name_mapper='^assets\(.*\)$' -> '<PROJECT_ROOT>/src/assets/\1'
 module.name_mapper='^forkedLibraries\(.*\)$' -> '<PROJECT_ROOT>/src/forkedLibraries/\1'
 module.name_mapper='^App.css$' -> '<PROJECT_ROOT>/src/App.css'

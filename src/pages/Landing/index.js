@@ -20,7 +20,7 @@ const Landing = () => (
   <>
     <h1 style={styles.title}>{LandingPageTitle}</h1>
     <div style={styles.title}>
-      <img src="doggo.jpeg" alt="" />
+      <img src="doggo.jpeg" title="hello" alt="" />
     </div>
   </>
 );
