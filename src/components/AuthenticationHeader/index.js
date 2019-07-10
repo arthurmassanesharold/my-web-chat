@@ -38,7 +38,7 @@ const styles = {
   },
 };
 
-const SignInMessage = '  Already have an account?  ';
+const SignInMessage = 'Already have an account?';
 const SignInName = 'Sign In';
 const SignUpName = 'Sign Up';
 
