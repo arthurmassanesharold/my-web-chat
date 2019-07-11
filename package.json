@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "connected-react-router": "^6.5.0",
     "firebase": "^6.2.4",
     "flow": "^0.2.3",
     "flow-bin": "0.98.0",
@@ -13,7 +14,9 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.2",
+    "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^5.10.0",
+    "redux-saga": "^1.0.5",
     "reselect-tools": "^0.0.7"
   },
   "scripts": {

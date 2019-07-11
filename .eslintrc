@@ -20,9 +20,15 @@
     }
   },
   "globals": {
+    "$ExtractActionParams": true,
+    "$ExtractComponentProps": true,
+    "$ExtractReturn": true,
+    "$ExtractObject": true,
     "AuthenticationState": true,
-    "UserInfo": true,
+    "ChoiceOf": true,
+    "MapOf": true,
     "State": true,
+    "UserInfo": true,
   },
   "rules": {
     "object-curly-newline": "warn",
