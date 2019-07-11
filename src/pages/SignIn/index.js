@@ -5,16 +5,14 @@ import Spacer from 'components/Spacer';
 import EmailInput from 'components/EmailInput';
 import PasswordInput from 'components/PasswordInput';
 import firebase from 'config';
-import { setIsLoggedIn, setUserInfo, type Action } from 'pages/SignIn/actions';
+import { setUserInfo, type Action } from 'pages/SignIn/actions';
 
 const mapDispatchToProps = {
-  setIsLoggedIn,
   setUserInfo,
 };
 
 type Props = {|
-  setIsLoggedIn: (isLoggedIn: boolean) => Action,
-  setUserInfo: (userInfo: UserInfo) => Action,
+  setUserInfo: (userInfo: ?UserInfo) => Action,
 |}
 
 const styles = {
@@ -52,7 +50,6 @@ const SignInPage = (props: Props) => {
       event.preventDefault();
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
       setCredentials({ email: '', password: '' });
-      props.setIsLoggedIn(true);
       props.setUserInfo({ email: credentials.email });
     } catch (error) {
       alert(error.message);

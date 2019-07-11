@@ -6,22 +6,20 @@ import PasswordInput from 'components/PasswordInput';
 import { firestore } from 'config';
 import firebase from 'firebase';
 import Spacer from 'components/Spacer';
-import { setIsLoggedIn, type Action } from 'pages/SignIn/actions';
+import { setUserInfo } from 'pages/SignIn/actions';
 
 const mapDispatchToProps = {
-  setIsLoggedIn,
+  setUserInfo,
 };
 
 type Props = {|
-  setIsLoggedIn: (isLoggedIn: boolean) => Action,
+  ...$ExtractObject<typeof mapDispatchToProps>
 |}
 
 const styles = {
   box: {
-    alignItems: 'center',
     color: 'darkgreen',
-    display: 'flex',
-    justifyContent: 'center',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: 'green',
@@ -55,7 +53,7 @@ const SignUpPage = (props: Props) => {
       });
       setCredentials({ email: '', password: '' });
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
-      props.setIsLoggedIn(true);
+      props.setUserInfo({ email: credentials.email });
     } catch (error) {
       alert(error.message);
     }
