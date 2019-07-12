@@ -11,11 +11,9 @@ const mapStateToProps = (state: State) => ({
   userInfo: selectUserInfo(state),
 });
 
-
 type Props = {|
   ...$ExtractReturn<typeof mapStateToProps>
 |};
-
 
 const styles = {
   auth: {

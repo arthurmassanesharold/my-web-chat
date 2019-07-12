@@ -7,13 +7,27 @@ import { firestore } from 'config';
 import firebase from 'firebase';
 import Spacer from 'components/Spacer';
 import { setUserInfo } from 'pages/SignIn/actions';
+import { selectUserInfo } from 'selectors/user';
+import { Redirect } from 'react-router-dom';
+import * as ROUTES from 'constants/routes';
+import UsernameInput from 'components/UsernameInput';
+
+const mapStateToProps = (state: State) => ({
+  userInfo: selectUserInfo(state),
+});
 
 const mapDispatchToProps = {
   setUserInfo,
 };
 
+type ComponentProps = {|
+  userInfo: UserInfo,
+|}
+
 type Props = {|
-  ...$ExtractObject<typeof mapDispatchToProps>
+  ...$ExtractObject<typeof mapDispatchToProps>,
+  ...ComponentProps,
+  ...$ExtractReturn<typeof mapStateToProps>
 |}
 
 const styles = {
@@ -31,12 +45,16 @@ const styles = {
 };
 
 type Credentials = {|
+  username: string,
   email: string,
   password: string,
 |}
 
 const SignUpPage = (props: Props) => {
-  const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
+  const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '', username: '' });
+  const { userInfo } = props;
+  console.log(userInfo);
+  if (userInfo) return (<Redirect to={ROUTES.HOME} />);
   const updateInput = (event) => {
     setCredentials({
       ...credentials,
@@ -50,10 +68,11 @@ const SignUpPage = (props: Props) => {
       await firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
       await firestore.collection('users').add({
         email: credentials.email,
+        username: credentials.username,
       });
-      setCredentials({ email: '', password: '' });
+      setCredentials({ email: '', password: '', username: '' });
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
-      props.setUserInfo({ email: credentials.email });
+      props.setUserInfo({ email: credentials.email, username: credentials.username });
     } catch (error) {
       alert(error.message);
     }
@@ -65,6 +84,8 @@ const SignUpPage = (props: Props) => {
       <div style={styles.box}>
         <h1>{SignUpMessage}</h1>
         <form onSubmit={addUser}>
+          <UsernameInput username={credentials.username} updateInput={updateInput} />
+          <Spacer size={15} />
           <EmailInput email={credentials.email} updateInput={updateInput} />
           <Spacer size={15} />
           <PasswordInput password={credentials.password} updateInput={updateInput} />
@@ -76,4 +97,4 @@ const SignUpPage = (props: Props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(SignUpPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
