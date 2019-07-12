@@ -4,15 +4,28 @@ import { connect } from 'react-redux';
 import Spacer from 'components/Spacer';
 import EmailInput from 'components/EmailInput';
 import PasswordInput from 'components/PasswordInput';
-import firebase from 'config';
-import { setUserInfo, type Action } from 'pages/SignIn/actions';
+import firebase, { firestore } from 'config';
+import { setUserInfo } from 'pages/SignIn/actions';
+import { selectUserInfo } from 'selectors/user';
+import * as ROUTES from 'constants/routes';
+import { Redirect } from 'react-router-dom';
+
+const mapStateToProps = (state: State) => ({
+  userInfo: selectUserInfo(state),
+});
+
+type ComponentProps = {|
+  userInfo: UserInfo,
+|}
 
 const mapDispatchToProps = {
   setUserInfo,
 };
 
 type Props = {|
-  setUserInfo: (userInfo: ?UserInfo) => Action,
+  ...$ExtractObject<typeof mapDispatchToProps>,
+  ...ComponentProps,
+  ...$ExtractReturn<typeof mapStateToProps>
 |}
 
 const styles = {
@@ -39,6 +52,8 @@ const ButtonMessage = 'Enter';
 
 const SignInPage = (props: Props) => {
   const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
+  const { userInfo } = props;
+  if (userInfo) return (<Redirect to={ROUTES.HOME} />);
   const updateInput = (event) => {
     setCredentials({
       ...credentials,
@@ -50,7 +65,10 @@ const SignInPage = (props: Props) => {
       event.preventDefault();
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
       setCredentials({ email: '', password: '' });
-      props.setUserInfo({ email: credentials.email });
+      const users = await firestore.collection('users').doc(credentials.email).get();
+      console.log(users.data());
+      const loggedUser = { username: 'yo' };
+      props.setUserInfo({ email: credentials.email, username: loggedUser.username });
     } catch (error) {
       alert(error.message);
     }
@@ -71,4 +89,4 @@ const SignInPage = (props: Props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(SignInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
