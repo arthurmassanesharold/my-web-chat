@@ -8,23 +8,21 @@ const styles = {
     color: 'white',
   },
   table: {
+    border: '5px inset green',
     borderCollapse: 'collapse',
     fontSize: '25px',
     marginLeft: '5%',
     width: '50%',
-
   },
   tEven: {
     backgroundColor: 'lightgreen',
     border: '1px solid green',
     padding: '8px',
-    textAlign: 'left',
   },
   tOdd: {
     backgroundColor: '#c3e6bc',
     border: '1px solid green',
     padding: '8px',
-    textAlign: 'left',
   },
 };
 

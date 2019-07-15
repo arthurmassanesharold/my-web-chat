@@ -40,10 +40,13 @@ const styles = {
   },
   title: {
     alignItems: 'center',
-    color: 'darkgreen',
+    border: '3px inset white',
+    color: 'green',
     display: 'flex',
     justifyContent: 'center',
+    padding: '10px',
     textDecoration: 'none',
+    width: '10%',
   },
 };
 
@@ -66,7 +69,9 @@ const LoggedInHeader = (props: Props) => {
       <Link to={ROUTES.HOME} style={styles.title}>
         <h1>{usersTitle}</h1>
       </Link>
-      <button style={styles.logout} type="submit" onClick={logOut}><u>{logOutMessage}</u></button>
+      <Link to={ROUTES.LANDING}>
+        <button style={styles.logout} type="submit" onClick={logOut}><u>{logOutMessage}</u></button>
+      </Link>
     </div>
   );
 };
