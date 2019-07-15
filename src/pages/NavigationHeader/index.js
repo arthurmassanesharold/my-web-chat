@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as ROUTES from 'constants/routes';
 import AuthenticationHeader from 'components/AuthenticationHeader';
-import LoggedInHeader from 'components/LoggedInHeader';
+import LoggedInHeader from 'connectedComponents/LoggedInHeader';
 import { selectUserInfo } from 'selectors/user';
 
 const mapStateToProps = (state: State) => ({

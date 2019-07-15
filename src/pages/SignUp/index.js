@@ -53,7 +53,6 @@ type Credentials = {|
 const SignUpPage = (props: Props) => {
   const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '', username: '' });
   const { userInfo } = props;
-  console.log(userInfo);
   if (userInfo) return (<Redirect to={ROUTES.HOME} />);
   const updateInput = (event) => {
     setCredentials({
