@@ -56,11 +56,15 @@ const LoggedInHeader = (props: Props) => {
     props.setUserInfo(null);
   };
   const homeTitle = 'Home';
+  const usersTitle = 'Users';
   return (
     <div style={styles.box}>
       <p style={styles.text}>{email}</p>
       <Link to={ROUTES.LANDING} style={styles.title}>
         <h1>{homeTitle}</h1>
+      </Link>
+      <Link to={ROUTES.HOME} style={styles.title}>
+        <h1>{usersTitle}</h1>
       </Link>
       <button style={styles.logout} type="submit" onClick={logOut}><u>{logOutMessage}</u></button>
     </div>
