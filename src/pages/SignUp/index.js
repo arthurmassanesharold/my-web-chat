@@ -68,7 +68,7 @@ const SignUpPage = (props: Props) => {
       await firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
       await firestore.collection('users').add({
         email: credentials.email,
-        uid: generateUniqueId(),
+        id: generateUniqueId(),
         username: credentials.username,
       });
       setCredentials({ email: '', password: '', username: '' });
