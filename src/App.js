@@ -13,6 +13,7 @@ import LandingPage from 'pages/Landing';
 import HomePage from 'pages/Home';
 import * as ROUTES from 'constants/routes';
 import store, { persistor } from 'store';
+import MessagesPage from 'pages/Messages/index';
 
 const App = () => (
   <Provider store={store}>
@@ -23,6 +24,7 @@ const App = () => (
         <Route path={ROUTES.SIGN_IN} component={SignIn} />
         <Route path={ROUTES.SIGN_UP} component={SignUp} />
         <Route path={ROUTES.HOME} component={HomePage} />
+        <Route path={ROUTES.MESSAGES} component={MessagesPage} />
       </Router>
     </PersistGate>
   </Provider>

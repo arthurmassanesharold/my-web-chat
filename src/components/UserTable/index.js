@@ -1,11 +1,17 @@
 // @flow
 import React from 'react';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
+import * as ROUTES from 'constants/routes';
 
 const styles = {
   head: {
     backgroundColor: 'darkgreen',
     color: 'white',
+  },
+  route: {
+    color: 'black',
+    textDecoration: 'none',
   },
   table: {
     border: '5px inset green',
@@ -28,7 +34,7 @@ const styles = {
 
 const UserTable = ({ users }: {| users: UserList |}) => {
   const list = _.map(users, (el) => (
-    <tr key={el.uid}>
+    <tr key={el.id}>
       <td style={styles.tEven}>{el.username}</td>
       <td style={styles.tEven}>{el.email}</td>
     </tr>
@@ -36,15 +42,17 @@ const UserTable = ({ users }: {| users: UserList |}) => {
   const UsernameText = 'Username';
   const EmailText = 'Email';
   return (
-    <table style={styles.table}>
-      <tbody>
-        <tr>
-          <th style={styles.head}>{UsernameText}</th>
-          <th style={styles.head}>{EmailText}</th>
-        </tr>
-        {list}
-      </tbody>
-    </table>
+    <Link to={ROUTES.MESSAGES} style={styles.route}>
+      <table style={styles.table}>
+        <tbody>
+          <tr>
+            <th style={styles.head}>{UsernameText}</th>
+            <th style={styles.head}>{EmailText}</th>
+          </tr>
+          {list}
+        </tbody>
+      </table>
+    </Link>
   );
 };
 

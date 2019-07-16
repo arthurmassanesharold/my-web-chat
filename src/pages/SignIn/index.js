@@ -66,7 +66,7 @@ const SignInPage = (props: Props) => {
       await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
       setCredentials({ email: '', password: '' });
       const user = await fetchUsernameByEmail(credentials.email);
-      props.setUserInfo({ email: credentials.email, username: user.username });
+      props.setUserInfo({ email: credentials.email, username: user && user.username });
     } catch (error) {
       alert(error.message);
     }
