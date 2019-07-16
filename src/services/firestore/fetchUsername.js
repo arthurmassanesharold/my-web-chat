@@ -6,7 +6,11 @@ export const fetchAllUsers = async () => {
     .collection('users')
     .get();
   const users = doc.docs.map((item) => (item.data()));
-  return (users);
+  const usersObject = users.reduce(
+    (obj, item) => ({ ...obj, [item.uid]: item }),
+    {}
+  );
+  return (usersObject);
 };
 
 const fetchUsernameByEmail = async (email: string) => {

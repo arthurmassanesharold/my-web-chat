@@ -29,6 +29,7 @@
     "MapOf": true,
     "State": true,
     "UserInfo": true,
+    "UserList": true,
   },
   "rules": {
     "object-curly-newline": "warn",

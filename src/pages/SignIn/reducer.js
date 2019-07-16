@@ -1,7 +1,7 @@
 // @flow
 import { type Action, SET_USER_INFO } from 'pages/SignIn/actions';
 
-const initialState = { userInfo: null };
+const initialState: AuthenticationState = { userInfo: null };
 
 const authenticationReducer = (state: AuthenticationState = initialState, action: Action): AuthenticationState => {
   switch (action.type) {
