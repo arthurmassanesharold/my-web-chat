@@ -11,6 +11,7 @@ import { selectUserInfo } from 'selectors/user';
 import { Redirect } from 'react-router-dom';
 import * as ROUTES from 'constants/routes';
 import UsernameInput from 'components/UsernameInput';
+import generateUniqueId from 'services/generateUniqueId';
 
 const mapStateToProps = (state: State) => ({
   userInfo: selectUserInfo(state),
@@ -67,6 +68,7 @@ const SignUpPage = (props: Props) => {
       await firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password);
       await firestore.collection('users').add({
         email: credentials.email,
+        uid: generateUniqueId(),
         username: credentials.username,
       });
       setCredentials({ email: '', password: '', username: '' });

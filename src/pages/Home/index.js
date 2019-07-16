@@ -3,17 +3,19 @@ import React, { type ComponentType, useState, useEffect } from 'react';
 import * as ROUTES from 'constants/routes';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { selectUserInfo } from 'selectors/user';
+import { selectUserInfo, selectUserList } from 'selectors/user';
 import UserTable from 'components/UserTable/index';
 import { fetchAllUsers } from 'services/firestore/fetchUsername';
 import Spacer from 'components/Spacer';
 
 const mapStateToProps = (state: State) => ({
   userInfo: selectUserInfo(state),
+  userList: selectUserList(state),
 });
 
 type ComponentProps = {|
   userInfo: UserInfo,
+  userList: UserList,
 |}
 
 type Props = {|
@@ -43,21 +45,15 @@ const styles = {
   },
 };
 
-type User = {|
-  username?: string,
-  email?: string,
-|};
-
 const HomePage = (props: Props) => {
-  const initialState = [];
-  const [usersList, setUsersList] = useState<Array<User>>(initialState);
+  const [usersList, setUsersList] = useState<UserList>({});
   useEffect(() => {
     const fetchAndSetUsersList = async () => {
       const allUsers = await fetchAllUsers();
       setUsersList(allUsers);
     };
     fetchAndSetUsersList();
-  });
+  }, []);
   const { userInfo } = props;
   if (!userInfo) {
     return (<Redirect to={ROUTES.SIGN_IN} />);

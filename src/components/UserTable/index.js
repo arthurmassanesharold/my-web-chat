@@ -26,28 +26,24 @@ const styles = {
   },
 };
 
-type User = {|
-  username?: string,
-  email?: string,
-|};
-
-const UserTable = ({ users }: {| users: Array<User> |}) => {
-  const even = 2;
-  const list = _.map(users, (el, index:number) => (
-    <tr>
-      <td style={index % even !== 0 ? styles.tEven : styles.tOdd}>{el.username}</td>
-      <td style={index % even !== 0 ? styles.tEven : styles.tOdd}>{el.email}</td>
+const UserTable = ({ users }: {| users: UserList |}) => {
+  const list = _.map(users, (el) => (
+    <tr key={el.uid}>
+      <td style={styles.tEven}>{el.username}</td>
+      <td style={styles.tEven}>{el.email}</td>
     </tr>
   ));
   const UsernameText = 'Username';
   const EmailText = 'Email';
   return (
     <table style={styles.table}>
-      <tr>
-        <th style={styles.head}>{UsernameText}</th>
-        <th style={styles.head}>{EmailText}</th>
-      </tr>
-      {list}
+      <tbody>
+        <tr>
+          <th style={styles.head}>{UsernameText}</th>
+          <th style={styles.head}>{EmailText}</th>
+        </tr>
+        {list}
+      </tbody>
     </table>
   );
 };

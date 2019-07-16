@@ -17,7 +17,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^5.10.0",
     "redux-saga": "^1.0.5",
-    "reselect-tools": "^0.0.7"
+    "reselect-tools": "^0.0.7",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

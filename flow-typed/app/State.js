@@ -9,6 +9,9 @@ declare type AuthenticationState = {|
   userInfo: ?UserInfo,
 |}
 
+declare type UserList = { [id: string]: UserInfo }
+
 declare type State = {|
-  authentication: AuthenticationState,
+  ui: {| authentication: AuthenticationState |},
+  data: {| userList: ?UserList |}
 |};
