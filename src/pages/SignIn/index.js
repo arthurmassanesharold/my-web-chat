@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import Spacer from 'components/Spacer';
 import EmailInput from 'components/EmailInput';
 import PasswordInput from 'components/PasswordInput';
-import firebase from 'config';
-import fetchUsernameByEmail from 'services/firestore/fetchUsername.js';
-import { setUserInfo } from 'pages/SignIn/actions';
+import { setUserInfo, signIn } from 'pages/SignIn/actions';
 import { selectUserInfo } from 'selectors/user';
 import * as ROUTES from 'constants/routes';
 import { Redirect } from 'react-router-dom';
@@ -21,6 +19,7 @@ type ComponentProps = {|
 
 const mapDispatchToProps = {
   setUserInfo,
+  signIn,
 };
 
 type Props = {|
@@ -43,15 +42,10 @@ const styles = {
   },
 };
 
-type Credentials = {|
-  email: string,
-  password: string,
-|}
-
 const SignInPage = (props: Props) => {
   const SignInMessage = 'Sign In';
   const ButtonMessage = 'Enter';
-  const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '' });
+  const [credentials, setCredentials] = useState<Credentials>({ email: '', password: '', username: '' });
   const { userInfo } = props;
   if (userInfo) return (<Redirect to={ROUTES.HOME} />);
   const updateInput = (event) => {
@@ -60,22 +54,21 @@ const SignInPage = (props: Props) => {
       [event.target.name]: event.target.value,
     });
   };
-  const signIn = async (event) => {
+  const signInFunction = async (event) => {
     try {
       event.preventDefault();
-      await firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password);
-      setCredentials({ email: '', password: '' });
-      const user = await fetchUsernameByEmail(credentials.email);
-      props.setUserInfo({ email: credentials.email, username: user && user.username });
+      props.signIn(credentials);
     } catch (error) {
       alert(error.message);
     }
+    setCredentials({ email: '', password: '', username: '' });
+    return (credentials.email);
   };
   return (
     <>
       <div style={styles.box}>
         <h1>{SignInMessage}</h1>
-        <form onSubmit={signIn}>
+        <form onSubmit={signInFunction}>
           <EmailInput email={credentials.email} updateInput={updateInput} />
           <Spacer size={15} />
           <PasswordInput password={credentials.password} updateInput={updateInput} />

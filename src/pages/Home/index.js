@@ -61,6 +61,7 @@ const HomePage = (props: Props) => {
   const name = userInfo.username ? userInfo.username : 'there';
   const message = `Hello, ${name}`;
   const usersMessage = 'Users:';
+  const messageTitle = 'Click on a user to view your conversation';
   return (
     <>
       <div style={styles.box}>
@@ -69,6 +70,7 @@ const HomePage = (props: Props) => {
       <h2><span style={styles.text}>{usersMessage}</span></h2>
       <Spacer size={20} />
       <UserTable users={usersList} />
+      <p style={styles.text}><i>{messageTitle}</i></p>
     </>
   );
 };

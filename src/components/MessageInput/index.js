@@ -14,7 +14,7 @@ const style = {
     rows: '20',
     textAlign: 'left',
     verticalAlign: 'top',
-    width: '20%',
+    width: '95%',
   },
 };
 

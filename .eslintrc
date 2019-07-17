@@ -26,6 +26,8 @@
     "$ExtractObject": true,
     "AuthenticationState": true,
     "ChoiceOf": true,
+    "Credentials": true,
+    "Generator":true,
     "MapOf": true,
     "State": true,
     "UserInfo": true,
