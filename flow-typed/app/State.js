@@ -1,5 +1,11 @@
 // @flow
 
+declare type Credentials = {|
+  username: string,
+  email: string,
+  password: string,
+|}
+
 declare type UserInfo = {|
   username?: string,
   email: string,

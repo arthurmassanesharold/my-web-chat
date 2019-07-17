@@ -10,7 +10,7 @@ const style = {
     display: 'flex',
     height: '25px',
     margin: '20px 0',
-    width: '20%',
+    width: '95%',
   },
 };
 

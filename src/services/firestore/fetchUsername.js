@@ -22,7 +22,7 @@ export const fetchAllUsers = async () => {
   return (usersObject);
 };
 
-const fetchUsernameByEmail = async (email: string) => {
+const fetchUsernameByEmail = async (email: string): Promise<?UserInfo> => {
   const user = await firestore
     .collection('users')
     .where('email', '==', email)

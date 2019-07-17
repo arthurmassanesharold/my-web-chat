@@ -12,10 +12,13 @@ import isExistingUser from 'services/firestore/fetchUsername';
 
 const styles = {
   box: {
-    alignSelf: 'center',
-    flex: 2,
-    marginLeft: '5%',
-    // width: '100%',
+    backgroundColor: 'lightgrey',
+    border: '2px solid green',
+    flex: '1',
+    height: '100%',
+    margin: '20px 0',
+    marginLeft: '1%',
+    padding: '1%',
   },
   button: {
     backgroundColor: 'green',
@@ -23,12 +26,12 @@ const styles = {
     borderRadius: '2px',
     color: 'white',
     fontSize: '20px',
+    width: '100%',
   },
   main: {
     display: 'flex',
-    flex: 1,
-    flexDirection: 'vertical',
-    flexShrink: '0',
+    height: '100%',
+    justifyContent: 'center',
   },
 };
 

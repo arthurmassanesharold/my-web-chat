@@ -31,7 +31,6 @@ const styles = {
     padding: '8px',
   },
 };
-
 const UserTable = ({ users }: {| users: UserList |}) => {
   const list = _.map(users, (el) => (
     <tr key={el.id}>

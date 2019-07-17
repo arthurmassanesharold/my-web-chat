@@ -60,15 +60,11 @@ const LoggedInHeader = (props: Props) => {
   };
   const homeTitle = 'Home';
   const usersTitle = 'Users';
-  const messagesTitle = 'Messages';
   return (
     <div style={styles.box}>
       <p style={styles.text}>{email}</p>
       <Link to={ROUTES.LANDING} style={styles.title}>
         <h1>{homeTitle}</h1>
-      </Link>
-      <Link to={ROUTES.MESSAGES} style={styles.title}>
-        <h1>{messagesTitle}</h1>
       </Link>
       <Link to={ROUTES.HOME} style={styles.title}>
         <h1>{usersTitle}</h1>

@@ -6,20 +6,26 @@ const styles = {
     backgroundColor: 'green',
     color: 'white',
     display: 'flex',
-    flex: 2,
+    flex: '4',
     flexDirection: 'column',
-    marginTop: '10px',
+    justifyContent: 'flex-start',
+    marginLeft: '1%',
+    marginRight: '1%',
+    marginTop: '20px',
+  },
+  title: {
+    backgroundColor: 'darkgreen',
+    marginTop: '0',
+    textAlign: 'center',
   },
 };
 
 const MessageList = () => {
-  const hello = 'hello';
   const messageText = 'Messages';
   return (
     <>
       <div style={styles.main}>
-        <h1 style={{ color: 'white' }}>{messageText}</h1>
-        <p>{hello}</p>
+        <h1 style={styles.title}>{messageText}</h1>
       </div>
     </>
   );
