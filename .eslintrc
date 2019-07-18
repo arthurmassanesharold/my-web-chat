@@ -29,6 +29,7 @@
     "Credentials": true,
     "Generator":true,
     "MapOf": true,
+    "Message": true,
     "State": true,
     "UserInfo": true,
     "UserList": true,

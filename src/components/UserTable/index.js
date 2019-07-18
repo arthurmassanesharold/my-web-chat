@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as ROUTES from 'constants/routes';
-import { setselectedUserForConversationForConversation } from 'pages/Home/actions';
+import { setselectedUserForConversation } from 'pages/Home/actions';
 import { selectUserInfo } from 'selectors/user';
 
 const mapStateToProps = (state: State) => ({
@@ -12,7 +12,7 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = {
-  setselectedUserForConversationForConversation,
+  setselectedUserForConversation,
 };
 
 const styles = {
@@ -23,6 +23,10 @@ const styles = {
   route: {
     color: 'black',
     textDecoration: 'none',
+  },
+  scrollableDiv: {
+    height: '100px',
+    overflow: 'scroll',
   },
   table: {
     border: '5px inset green',
@@ -50,9 +54,9 @@ type Props = {|
 |}
 
 const UserTable = (props: Props) => {
-  const { users } = props;
-  const list = _.map(users, (el) => (
-    <tr key={el.id} onClick={() => { props.setselectedUserForConversationForConversation(el); }}>
+  const { users, userInfo } = props;
+  const list = _.map(_.filter(users, (el) => (userInfo && el.email !== userInfo.email)), (el) => (
+    <tr key={el.email} onClick={() => { props.setselectedUserForConversation(el); }}>
       <td style={styles.tEven}>{el.username}</td>
       <td style={styles.tEven}>{el.email}</td>
     </tr>

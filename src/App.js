@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import {
