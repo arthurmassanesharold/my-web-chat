@@ -18,6 +18,6 @@ declare type AuthenticationState = {|
 declare type UserList = { [id: string]: UserInfo }
 
 declare type State = {|
-  ui: {| authentication: AuthenticationState |},
+  ui: {| authentication: AuthenticationState, selectedUserForConversation: ?UserInfo |},
   data: {| userList: ?UserList |}
 |};

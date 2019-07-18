@@ -16,11 +16,12 @@ const mapStateToProps = (state: State) => ({
 type ComponentProps = {|
   userInfo: UserInfo,
   userList: UserList,
+  selectedUserForConversation: ?UserInfo,
 |}
 
 type Props = {|
   ...ComponentProps,
-  ...$ExtractReturn<typeof mapStateToProps>
+  ...$ExtractReturn<typeof mapStateToProps>,
 |};
 
 const styles = {
