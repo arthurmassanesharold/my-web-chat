@@ -7,6 +7,12 @@ import { selectUserInfo, selectUserList } from 'selectors/user';
 import UserTable from 'components/UserTable/index';
 import { fetchAllUsers } from 'services/firestore/fetchUsername';
 import Spacer from 'components/Spacer';
+import { fetchMessages } from 'services/firestore/fetchMessages';
+import { setMessages } from 'pages/Messages/actions';
+
+const mapDispatchToProps = {
+  setMessages,
+};
 
 const mapStateToProps = (state: State) => ({
   userInfo: selectUserInfo(state),
@@ -22,6 +28,7 @@ type ComponentProps = {|
 type Props = {|
   ...ComponentProps,
   ...$ExtractReturn<typeof mapStateToProps>,
+  ...$ExtractObject<typeof mapDispatchToProps>
 |};
 
 const styles = {
@@ -47,6 +54,7 @@ const styles = {
 };
 
 const HomePage = (props: Props) => {
+  const { userInfo } = props;
   const [usersList, setUsersList] = useState<UserList>({});
   useEffect(() => {
     const fetchAndSetUsersList = async () => {
@@ -54,8 +62,13 @@ const HomePage = (props: Props) => {
       setUsersList(allUsers);
     };
     fetchAndSetUsersList();
-  }, []);
-  const { userInfo } = props;
+    const fetchAndSetMessages = async () => {
+      if (!userInfo) return;
+      const allMessages = await fetchMessages(userInfo.email);
+      props.setMessages(allMessages);
+    };
+    fetchAndSetMessages();
+  }, [userInfo, props]);
   if (!userInfo) {
     return (<Redirect to={ROUTES.SIGN_IN} />);
   }
@@ -76,5 +89,5 @@ const HomePage = (props: Props) => {
   );
 };
 
-export default (connect(mapStateToProps)(HomePage)
+export default (connect(mapStateToProps, mapDispatchToProps)(HomePage)
 : ComponentType<ComponentProps>);

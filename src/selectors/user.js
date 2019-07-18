@@ -2,7 +2,7 @@
 import { createSelector } from 'reselect';
 import { selectUi, selectData } from 'selectors/rootSelectors';
 
-export const selectselectedUserForConversationForConversation: State => ?UserInfo = createSelector(
+export const selectSelectedUserForConversation: State => ?UserInfo = createSelector(
   selectUi,
   (ui) => ui.selectedUserForConversation
 );

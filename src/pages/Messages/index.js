@@ -3,13 +3,14 @@ import React, { useState, type ComponentType } from 'react';
 import MessageInput from 'components/MessageInput';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectUserInfo, selectselectedUserForConversationForConversation } from 'selectors/user';
+import { selectUserInfo, selectSelectedUserForConversation } from 'selectors/user';
 import * as ROUTES from 'constants/routes';
 import { firestore } from 'config';
-import MessageList from 'connectedComponents/Messages';
+import MessageList from 'components/Messages';
 import isExistingUser from 'services/firestore/fetchUsername';
 import moment from 'moment';
 import _ from 'lodash';
+import generateUniqueId from 'services/generateUniqueId';
 
 const styles = {
   box: {
@@ -37,11 +38,11 @@ const styles = {
 };
 
 const mapStateToProps = (state: State) => ({
-  selectedUserForConversation: selectselectedUserForConversationForConversation(state),
+  selectedUserForConversation: selectSelectedUserForConversation(state),
   userInfo: selectUserInfo(state),
 });
 
-type Message = {|
+type UserMessage = {|
   message: ?string,
 |}
 
@@ -55,7 +56,7 @@ type Props = {|
 
 const MessagesPage = (props: Props) => {
   const { userInfo, selectedUserForConversation } = props;
-  const [message, updateMessage] = useState<Message>({ message: '' });
+  const [message, updateMessage] = useState<UserMessage>({ message: '' });
   if (!userInfo) return (<Redirect to={ROUTES.SIGN_IN} />);
   if (!selectedUserForConversation) return (<Redirect to={ROUTES.HOME} />);
   const sendMessageText = 'Send';
@@ -77,6 +78,7 @@ const MessagesPage = (props: Props) => {
       await firestore.collection('messages').add({
         content: message.message,
         from: userInfo.email,
+        id: generateUniqueId(),
         time: moment(_.now()).toDate(),
         to: selectedUserForConversation.email,
         userEmails: [userInfo.email, selectedUserForConversation.email],
@@ -104,7 +106,10 @@ const MessagesPage = (props: Props) => {
             <button type="submit" style={styles.button}>{sendMessageText}</button>
           </form>
         </div>
-        <MessageList />
+        <MessageList
+          loggedUser={userInfo}
+          otherUserEmail={selectedUserForConversation.email}
+        />
       </div>
     </>
   );
