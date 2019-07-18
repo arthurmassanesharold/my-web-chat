@@ -1,14 +1,15 @@
 // @flow
 import React, { useState, type ComponentType } from 'react';
 import MessageInput from 'components/MessageInput';
-import RecipientInput from 'components/RecipientInput';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectUserInfo } from 'selectors/user';
+import { selectUserInfo, selectselectedUserForConversationForConversation } from 'selectors/user';
 import * as ROUTES from 'constants/routes';
 import { firestore } from 'config';
 import MessageList from 'connectedComponents/Messages';
 import isExistingUser from 'services/firestore/fetchUsername';
+import moment from 'moment';
+import _ from 'lodash';
 
 const styles = {
   box: {
@@ -36,12 +37,12 @@ const styles = {
 };
 
 const mapStateToProps = (state: State) => ({
+  selectedUserForConversation: selectselectedUserForConversationForConversation(state),
   userInfo: selectUserInfo(state),
 });
 
 type Message = {|
   message: ?string,
-  recipient: string,
 |}
 
 type ComponentProps = {|
@@ -53,9 +54,10 @@ type Props = {|
 |};
 
 const MessagesPage = (props: Props) => {
-  const { userInfo } = props;
-  const [message, updateMessage] = useState<Message>({ message: '', recipient: '' });
+  const { userInfo, selectedUserForConversation } = props;
+  const [message, updateMessage] = useState<Message>({ message: '' });
   if (!userInfo) return (<Redirect to={ROUTES.SIGN_IN} />);
+  if (!selectedUserForConversation) return (<Redirect to={ROUTES.HOME} />);
   const sendMessageText = 'Send';
   const updateInput = (event) => {
     updateMessage({
@@ -66,41 +68,45 @@ const MessagesPage = (props: Props) => {
   const submitMessage = async (event) => {
     try {
       event.preventDefault();
-      if (!message.recipient || !message.message) {
-        throw new Error('Message or recipient is empty');
-      } else if (message.recipient === userInfo.email) {
-        throw new Error(`Stop trying to send messages to yourself, ${userInfo.username || ''}`);
-      } else if (!await isExistingUser(message.recipient)) {
-        const errMessage = `User ${message.recipient} does not exist`;
+      if (!message.message) {
+        throw new Error('Message is empty');
+      } else if (!await isExistingUser(selectedUserForConversation.email)) {
+        const errMessage = `User ${selectedUserForConversation.email} does not exist`;
         throw new Error(errMessage);
       }
       await firestore.collection('messages').add({
         content: message.message,
         from: userInfo.email,
-        to: message.recipient,
+        time: moment(_.now()).toDate(),
+        to: selectedUserForConversation.email,
+        userEmails: [userInfo.email, selectedUserForConversation.email],
       });
-      updateMessage({ message: '', recipient: message.recipient });
+      updateMessage({ message: '' });
     } catch (error) {
       alert(error);
     }
   };
+  const conversationMessage = 'Your messages with ';
+  const recipient = `${selectedUserForConversation.username || ''} <${selectedUserForConversation.email}>`;
   return (
-    <div style={styles.main}>
-      <div style={styles.box}>
-        <form onSubmit={submitMessage}>
-          <RecipientInput
-            recipient={message.recipient}
-            updateRecipient={updateInput}
-          />
-          <MessageInput
-            message={message.message}
-            updateMessage={updateInput}
-          />
-          <button type="submit" style={styles.button}>{sendMessageText}</button>
-        </form>
+    <>
+      <h1 style={{ color: 'green', marginLeft: '1%' }}>
+        {conversationMessage}
+        <u style={{ fontStyle: 'italic' }}>{recipient}</u>
+      </h1>
+      <div style={styles.main}>
+        <div style={styles.box}>
+          <form onSubmit={submitMessage}>
+            <MessageInput
+              message={message.message}
+              updateMessage={updateInput}
+            />
+            <button type="submit" style={styles.button}>{sendMessageText}</button>
+          </form>
+        </div>
+        <MessageList />
       </div>
-      <MessageList />
-    </div>
+    </>
   );
 };
 

@@ -1,8 +1,19 @@
 // @flow
 import React from 'react';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as ROUTES from 'constants/routes';
+import { setselectedUserForConversationForConversation } from 'pages/Home/actions';
+import { selectUserInfo } from 'selectors/user';
+
+const mapStateToProps = (state: State) => ({
+  userInfo: selectUserInfo(state),
+});
+
+const mapDispatchToProps = {
+  setselectedUserForConversationForConversation,
+};
 
 const styles = {
   head: {
@@ -31,9 +42,17 @@ const styles = {
     padding: '8px',
   },
 };
-const UserTable = ({ users }: {| users: UserList |}) => {
+
+type Props = {|
+  users: UserList,
+  ...$ExtractObject<typeof mapDispatchToProps>,
+  ...$ExtractReturn<typeof mapStateToProps>
+|}
+
+const UserTable = (props: Props) => {
+  const { users } = props;
   const list = _.map(users, (el) => (
-    <tr key={el.id}>
+    <tr key={el.id} onClick={() => { props.setselectedUserForConversationForConversation(el); }}>
       <td style={styles.tEven}>{el.username}</td>
       <td style={styles.tEven}>{el.email}</td>
     </tr>
@@ -55,4 +74,4 @@ const UserTable = ({ users }: {| users: UserList |}) => {
   );
 };
 
-export default UserTable;
+export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
