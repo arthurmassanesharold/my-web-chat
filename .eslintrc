@@ -30,6 +30,7 @@
     "Generator":true,
     "MapOf": true,
     "Message": true,
+    "MapOfMessages": true,
     "State": true,
     "UserInfo": true,
     "UserList": true,

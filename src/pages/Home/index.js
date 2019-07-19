@@ -7,7 +7,6 @@ import { selectUserInfo, selectUserList } from 'selectors/user';
 import UserTable from 'components/UserTable/index';
 import { fetchAllUsers } from 'services/firestore/fetchUsername';
 import Spacer from 'components/Spacer';
-import { fetchMessages } from 'services/firestore/fetchMessages';
 import { setMessages } from 'pages/Messages/actions';
 
 const mapDispatchToProps = {
@@ -62,13 +61,7 @@ const HomePage = (props: Props) => {
       setUsersList(allUsers);
     };
     fetchAndSetUsersList();
-    const fetchAndSetMessages = async () => {
-      if (!userInfo) return;
-      const allMessages = await fetchMessages(userInfo.email);
-      props.setMessages(allMessages);
-    };
-    fetchAndSetMessages();
-  }, [userInfo, props]);
+  }, [userInfo]);
   if (!userInfo) {
     return (<Redirect to={ROUTES.SIGN_IN} />);
   }

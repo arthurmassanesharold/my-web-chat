@@ -14,6 +14,8 @@ declare type Message = {|
   userEmails: Array<string>,
 |}
 
+declare type MapOfMessages = { [id: string]: Message }
+
 declare type Credentials = {|
   username: string,
   email: string,
@@ -32,6 +34,9 @@ declare type AuthenticationState = {|
 declare type UserList = { [id: string]: UserInfo }
 
 declare type State = {|
-  ui: {| authentication: AuthenticationState, selectedUserForConversation: ?UserInfo |},
-  data: {| userList: ?UserList, messages: Array<Message> |}
+  ui: {|
+    authentication: AuthenticationState,
+    selectedUserForConversation: ?UserInfo,
+  |},
+  data: {| userList: ?UserList, messages: MapOfMessages |}
 |};
