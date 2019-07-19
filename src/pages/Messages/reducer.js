@@ -1,12 +1,12 @@
 // @flow
 import { type Action, SET_MESSAGES } from 'pages/Messages/actions';
 
-const initialState = [];
+const initialState = {};
 
-const messagesReducer = (state: Array<Message> = initialState, action: Action): Array<Message> => {
+const messagesReducer = (state: MapOfMessages = initialState, action: Action): MapOfMessages => {
   switch (action.type) {
     case SET_MESSAGES:
-      return (action.messages);
+      return ({ ...state, ...action.messages });
     default:
       return (state);
   }

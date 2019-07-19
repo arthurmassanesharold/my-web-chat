@@ -31,4 +31,6 @@ const store = createStore(persistedReducer, window.START_FROM_SERVER, enhancer);
 export const persistor = persistStore(store);
 export default store;
 
+// persistor.purge();
+
 sagaMiddleware.run(rootSaga);

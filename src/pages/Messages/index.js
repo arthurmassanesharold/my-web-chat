@@ -108,7 +108,7 @@ const MessagesPage = (props: Props) => {
         </div>
         <MessageList
           loggedUser={userInfo}
-          otherUserEmail={selectedUserForConversation.email}
+          selectedUserEmail={selectedUserForConversation.email}
         />
       </div>
     </>

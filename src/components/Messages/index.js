@@ -1,9 +1,10 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { useEffect, type ComponentType } from 'react';
 import _ from 'lodash';
 import { selectMessagesByOtherUserEmailSortByDate } from 'selectors/messagesSelectors';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
+import { SUBSCRIBE_TO_MESSAGES } from 'pages/Messages/sagas';
 
 const styles = {
   main: {
@@ -35,27 +36,34 @@ const styles = {
 
 type ComponentProps = {|
   loggedUser: UserInfo,
-  otherUserEmail: string,
+  selectedUserEmail: string,
 |}
 
 // eslint-disable-next-line no-use-before-define
 const mapStateToProps = (state: State, componentProps: ComponentProps) => ({
-  conversationMessages: selectMessagesByOtherUserEmailSortByDate(componentProps.otherUserEmail)(state),
+  conversationMessages: selectMessagesByOtherUserEmailSortByDate(componentProps.selectedUserEmail)(state),
 });
 
+const mapDispatchToProps = {
+  subscribeToMessages: () => ({ type: SUBSCRIBE_TO_MESSAGES }),
+};
 
 type Props = {|
   ...ComponentProps,
-  ...$ExtractReturn<typeof mapStateToProps>
+  ...$ExtractReturn<typeof mapStateToProps>,
+  ...$ExtractObject<typeof mapDispatchToProps>
 |}
 
 const MessageList = (props: Props) => {
   const messageText = 'Messages';
-  const { conversationMessages, loggedUser } = props;
+  const { conversationMessages, loggedUser, subscribeToMessages } = props;
   const separator = ' - ';
   const thousand = 1000;
+  useEffect(() => {
+    subscribeToMessages();
+  }, [subscribeToMessages]);
   const messageList = _.map(conversationMessages, (message) => (
-    <div style={message.from === loggedUser.email ? styles.receivedMessage : styles.sentMessage}>
+    <div key={message.id} style={message.from === loggedUser.email ? styles.receivedMessage : styles.sentMessage}>
       <Message
         className="messageClass"
         compact
@@ -79,5 +87,5 @@ const MessageList = (props: Props) => {
   );
 };
 
-export default (connect(mapStateToProps)(MessageList)
+export default (connect(mapStateToProps, mapDispatchToProps)(MessageList)
 : ComponentType<ComponentProps>);

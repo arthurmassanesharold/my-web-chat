@@ -270,7 +270,7 @@ declare module 'semantic-ui-react/dist/commonjs/collections/Message/MessageItem'
   declare module.exports: any;
 }
 
-declare module 'semantic-ui-react/dist/commonjs/collections/Message/MessageList' {
+declare module 'semantic-ui-react/dist/commonjs/collections/Message/MapOfMessages' {
   declare module.exports: any;
 }
 
@@ -1326,7 +1326,7 @@ declare module 'semantic-ui-react/dist/es/collections/Message/MessageItem' {
   declare module.exports: any;
 }
 
-declare module 'semantic-ui-react/dist/es/collections/Message/MessageList' {
+declare module 'semantic-ui-react/dist/es/collections/Message/MapOfMessages' {
   declare module.exports: any;
 }
 
@@ -2382,7 +2382,7 @@ declare module 'semantic-ui-react/src/collections/Message/MessageItem' {
   declare module.exports: any;
 }
 
-declare module 'semantic-ui-react/src/collections/Message/MessageList' {
+declare module 'semantic-ui-react/src/collections/Message/MapOfMessages' {
   declare module.exports: any;
 }
 
@@ -3341,8 +3341,8 @@ declare module 'semantic-ui-react/dist/commonjs/collections/Message/MessageHeade
 declare module 'semantic-ui-react/dist/commonjs/collections/Message/MessageItem.js' {
   declare module.exports: $Exports<'semantic-ui-react/dist/commonjs/collections/Message/MessageItem'>;
 }
-declare module 'semantic-ui-react/dist/commonjs/collections/Message/MessageList.js' {
-  declare module.exports: $Exports<'semantic-ui-react/dist/commonjs/collections/Message/MessageList'>;
+declare module 'semantic-ui-react/dist/commonjs/collections/Message/MapOfMessages.js' {
+  declare module.exports: $Exports<'semantic-ui-react/dist/commonjs/collections/Message/MapOfMessages'>;
 }
 declare module 'semantic-ui-react/dist/commonjs/collections/Table/index.js' {
   declare module.exports: $Exports<'semantic-ui-react/dist/commonjs/collections/Table/index'>;
@@ -4133,8 +4133,8 @@ declare module 'semantic-ui-react/dist/es/collections/Message/MessageHeader.js' 
 declare module 'semantic-ui-react/dist/es/collections/Message/MessageItem.js' {
   declare module.exports: $Exports<'semantic-ui-react/dist/es/collections/Message/MessageItem'>;
 }
-declare module 'semantic-ui-react/dist/es/collections/Message/MessageList.js' {
-  declare module.exports: $Exports<'semantic-ui-react/dist/es/collections/Message/MessageList'>;
+declare module 'semantic-ui-react/dist/es/collections/Message/MapOfMessages.js' {
+  declare module.exports: $Exports<'semantic-ui-react/dist/es/collections/Message/MapOfMessages'>;
 }
 declare module 'semantic-ui-react/dist/es/collections/Table/index.js' {
   declare module.exports: $Exports<'semantic-ui-react/dist/es/collections/Table/index'>;
@@ -4925,8 +4925,8 @@ declare module 'semantic-ui-react/src/collections/Message/MessageHeader.js' {
 declare module 'semantic-ui-react/src/collections/Message/MessageItem.js' {
   declare module.exports: $Exports<'semantic-ui-react/src/collections/Message/MessageItem'>;
 }
-declare module 'semantic-ui-react/src/collections/Message/MessageList.js' {
-  declare module.exports: $Exports<'semantic-ui-react/src/collections/Message/MessageList'>;
+declare module 'semantic-ui-react/src/collections/Message/MapOfMessages.js' {
+  declare module.exports: $Exports<'semantic-ui-react/src/collections/Message/MapOfMessages'>;
 }
 declare module 'semantic-ui-react/src/collections/Table/index.js' {
   declare module.exports: $Exports<'semantic-ui-react/src/collections/Table/index'>;

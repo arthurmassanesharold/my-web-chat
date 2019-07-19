@@ -1,15 +1,15 @@
 // @flow
 export const SET_MESSAGES = 'SET_MESSAGES';
 
-export const setMessages = (messages: Array<Message>) => ({
+export const setMessages = (messages: MapOfMessages) => ({
   messages,
   type: SET_MESSAGES,
 });
 
-type setMessagesAction = {|
-  messages: Array<Message>,
+type SetMessagesAction = {|
+  messages: MapOfMessages,
   type: 'SET_MESSAGES',
 |}
 
 export type Action =
-| setMessagesAction
+| SetMessagesAction
