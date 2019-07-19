@@ -57,10 +57,11 @@ const MessageList = (props: Props) => {
   const messageList = _.map(conversationMessages, (message) => (
     <div style={message.from === loggedUser.email ? styles.receivedMessage : styles.sentMessage}>
       <Message
+        className="messageClass"
         compact
         key={message.id}
         header={message.content}
-        size="large"
+        size="big"
         color={message.from === loggedUser.email ? 'olive' : 'green'}
         content={message.from + separator + new Date(message.time.seconds * thousand).toLocaleDateString()}
       />
@@ -70,7 +71,7 @@ const MessageList = (props: Props) => {
     <>
       <div style={styles.main}>
         <h1 style={styles.title}>{messageText}</h1>
-        <div style={{ height: '75%', overflowY: 'scroll' }}>
+        <div style={{ height: '666px', overflowY: 'scroll' }}>
           {messageList}
         </div>
       </div>

@@ -56,7 +56,7 @@ type Props = {|
 const UserTable = (props: Props) => {
   const { users, userInfo } = props;
   const list = _.map(_.filter(users, (el) => (userInfo && el.email !== userInfo.email)), (el) => (
-    <tr key={el.email} onClick={() => { props.setselectedUserForConversation(el); }}>
+    <tr key={el.email} className="tableRow" onClick={() => { props.setselectedUserForConversation(el); }}>
       <td style={styles.tEven}>{el.username}</td>
       <td style={styles.tEven}>{el.email}</td>
     </tr>

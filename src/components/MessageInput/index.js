@@ -8,13 +8,14 @@ const style = {
     borderRadius: '3px',
     color: 'darkgreen',
     display: 'flex',
-    height: '75px',
+    fontSize: '20px',
+    height: '100px',
     margin: '20px 0',
     resize: 'none',
     rows: '20',
     textAlign: 'left',
     verticalAlign: 'top',
-    width: '95%',
+    width: '100%',
   },
 };
 
